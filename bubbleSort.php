@@ -1,32 +1,31 @@
 <?php
-
 function microtime_float()
 {
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
 }
 
-function insertionSort($array)
+function bubbleSort($array)
 {
   $n = count($array);
-  for($i = 1; $i<$n; $i++)
-  {
-    $temp = $array[$i];
-    for($j=$i-1; $j>=0; $j--)
+  $swap = true;
+  while($swap)
+  {$swap= false;
+
+    for ($i=0; $i<$n-1; $i++)
     {
-      if($temp<$array[$j])
+      if ($array[$i+1]<$array[$i])
       {
-        $array[$j+1]=$array[$j];
-      }
-      else
-      {
-        break;
+        $temp = $array[$i];
+        $array[$i]=$array[$i+1];
+        $array[$i+1] = $temp;
+        $swap=true;
       }
     }
-    $array[$j+1] = $temp;
   }
   return $array;
 }
+
 
 $test = array();
 
@@ -36,7 +35,7 @@ for($k=0; $k<100; $k++)
 }
 
 $time_start = microtime_float();
-var_dump (insertionSort($test));
+var_dump (bubbleSort($test));
 $time_end = microtime_float();
 
 $time = $time_end - $time_start;
